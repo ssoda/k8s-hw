@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-2
+  namespace: default
+  labels:
+    app: nginx
+spec:
+  containers:
+  - image: nginx:latest
+    imagePullPolicy: Always
+    name: nginx
+    ports:
+      - containerPort: 80
+        protocol: TCP
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: config-volume
+  volumes:
+  - name: config-volume
+    configMap:
+      name: bar
+      items:
+        - key: password
+          path: shared-config

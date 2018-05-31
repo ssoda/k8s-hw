@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: web
+  name: web-svc
+  namespace: default
+spec:
+  ports:
+  - port: 5566
+    protocol: TCP
+    targetPort: 5566
+  selector:
+    app: web
+  sessionAffinity: None
+  type: NodePort
